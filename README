@@ -1,0 +1,19 @@
+This is a simple test case.
+
+Build using:
+
+git clone https://git.yoctoproject.org/poky
+git clone https://github.com/mhatle/yp-hardlink-test-layer
+. ./poky/oe-init-build-env build-test
+bitbake-layers add-layer ../yp-hardlink-test-layer
+bitbake hardlink-test
+
+As of Jul 18 2024, it's failing similar to:
+
+ERROR: hardlink-test-1.0-r0 do_package: Fatal errors occurred in subprocesses:
+Command '['x86_64-poky-linux-strip', '--strip-debug', '--remove-section=.comment', '--remove-section=.note', '--preserve-dates', '/scratch/mhatle/git/external/build-hl-test/tmp/work/core2-64-poky-linux/hardlink-test/1.0/package/usr/lib/libhelloworld-49.a']' returned non-zero exit status 1.
+Subprocess output:x86_64-poky-linux-strip: error: the input file '/scratch/mhatle/git/external/build-hl-test/tmp/work/core2-64-poky-linux/hardlink-test/1.0/package/usr/lib/libhelloworld-49.a' is empty
+
+ERROR: Logfile of failure stored in: /scratch/mhatle/git/external/build-hl-test/tmp/work/core2-64-poky-linux/hardlink-test/1.0/temp/log.do_package.1548124
+ERROR: Task (/scratch/mhatle/git/external/test-layer/recipes-tests/test-case/hardlink-test.bb:do_package) failed with exit code '1'
+
